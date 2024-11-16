@@ -122,7 +122,7 @@ class Ui_BFGS_calc(object):
         _translate = QtCore.QCoreApplication.translate
         BFGS_calc.setWindowTitle(_translate("BFGS_calc", "BFGS_calc"))
         self.label.setText(_translate("BFGS_calc", "Функция:"))
-        self.Func.setText(_translate("BFGS_calc", "x^2+y"))
+        self.Func.setText(_translate("BFGS_calc", "x0^2+x1"))
         self.Calculate.setText(_translate("BFGS_calc", "Рассчитать"))
         self.label_2.setText(_translate("BFGS_calc", "Точность"))
         self.EPS.setText(_translate("BFGS_calc", "0.001"))
