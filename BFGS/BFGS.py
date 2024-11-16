@@ -32,7 +32,7 @@ class BFGS():
                 {
                     'iteration': 0,
                     'coord': self.x.tolist(),
-                    'f': self.f(self.x)
+                    'f': float(self.f(self.x))
                 }
             ]
             }
@@ -41,7 +41,7 @@ class BFGS():
             'iteration': k,
             'coord': xk.tolist(),
             'hessian': hk.tolist(),
-            'f': self.f(xk)
+            'f': float(self.f(xk))
         })
     # Реализация метода BFGS для минимизации функции
     def bfgs_method(self):
