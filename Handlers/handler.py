@@ -1,7 +1,6 @@
-from BFGS import BFGS
 from Interface.interface import Ui_BFGS_calc
 from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
-from Handlers import parse
+from Handlers import parse,api
 class Ui_BFGS(Ui_BFGS_calc,QMainWindow):
     def __init__(self):
         super(Ui_BFGS,self).__init__()
@@ -51,6 +50,10 @@ class Ui_BFGS(Ui_BFGS_calc,QMainWindow):
             self.json['table_func']['coords'].append(float(self.Table_func.item(r,1).text()))
             self.json['table_func']['derivatives'].append(self.Table_func.item(r,2).text())
             f1.append(self.Table_func.item(r,2).text())
+        print(self.json)
+        res=api.api_service()
+        res.parse_json(self.json)
+        res=res.get_result_BFGS()
     
     def create_report_button_clicked(self):
         pass
