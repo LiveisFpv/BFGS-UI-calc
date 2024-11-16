@@ -45,16 +45,17 @@ class BFGS():
         })
     # Реализация метода BFGS для минимизации функции
     def bfgs_method(self):
-        # Минимизация функции f(x) методом BFGS.
+        """
+        Минимизация функции f(x) методом BFGS.
+        """
         if self.maxiter is None:
             # Если максимальное число итераций не указано, то задаем значение
             self.maxiter = len(self.x) * 200
 
-        # Начальные значения
         k = 0  # Номер итерации
         gfk = self.fprime(self.x)  # Градиент функции в начальной точке
         N = len(self.x)  # Размерность задачи
-        I = np.eye(N, dtype=int)  # Единичная матрица
+        I = np.eye(N)  # Единичная матрица
         Hk = I  # Начальная матрица Гессе (приближение)
         xk = self.x  # Текущая точка
     
@@ -68,6 +69,9 @@ class BFGS():
             line_search = sp.optimize.line_search(self.f, self.fprime, xk, pk)
             alpha_k = line_search[0]  # Берем только значение alpha_k
             
+            if alpha_k is None:
+                alpha_k = 0.05  # Если линейный поиск не дал значения, используем фиксированный шаг
+            
             # Обновляем текущую точку xk
             xkp1 = xk + alpha_k * pk  # Новая точка
             sk = xkp1 - xk  # Вектор изменения точки
@@ -77,14 +81,21 @@ class BFGS():
             gfkp1 = self.fprime(xkp1)  # Новый градиент
             yk = gfkp1 - gfk  # Разница градиентов
             gfk = gfkp1  # Обновляем текущий градиент
+            dot_ysk = np.dot(yk, sk)
             
+            # Если скалярное произведение слишком мало, избегаем деления на ноль
+            if np.abs(dot_ysk) < 1e-10:
+                print("Warning: Skalar product is too small, skipping Hessian update")
+            else:
             # Обновляем матрицу Гессе (приближенно) с использованием формулы BFGS
-            ro = 1.0 / (np.dot(yk, sk))  # Скейлящий множитель
-            A1 = I - ro * sk[:, np.newaxis] * yk[np.newaxis, :]  # Промежуточная матрица
-            A2 = I - ro * yk[:, np.newaxis] * sk[np.newaxis, :]  # Промежуточная матрица
-            Hk = np.dot(A1, np.dot(Hk, A2)) + (ro * sk[:, np.newaxis] * sk[np.newaxis, :])
+                ro = 1.0 / dot_ysk
+                A1 = I - ro * np.outer(sk, yk)  # Промежуточная матрица
+                A2 = I - ro * np.outer(yk, sk)  # Промежуточная матрица
+                Hk = np.dot(A1, np.dot(Hk, A2)) + ro * np.outer(sk, sk)
+            
             k += 1  # Увеличиваем счетчик итераций
-            self.add_iter(xk,Hk,k)
+            self.add_iter(xk, Hk, k)
+            
             
         return (xk, self.iterations)  # Возвращаем точку минимума и количество итераций
 

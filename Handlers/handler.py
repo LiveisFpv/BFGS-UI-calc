@@ -36,6 +36,7 @@ class Ui_BFGS(Ui_BFGS_calc,QMainWindow):
         
     
     def calculate_button_clicked(self):
+        self.e=None
         self.json={
             'func': self.Func.text(),
             'epsilon': float(self.EPS.text()),
@@ -53,10 +54,15 @@ class Ui_BFGS(Ui_BFGS_calc,QMainWindow):
         print(self.json)
         res=api.api_service()
         res.parse_json(self.json)
-        res=res.get_result_BFGS()
-        self.json['iterations']=res[1]
-        print(self.json)
+        try:
+            res=res.get_result_BFGS()
+            self.json['iterations']=res[1]
+            print(self.json)
+        except Exception as e:
+            self.e=e
         self.create_res_window()
+        
+
 
     def create_res_window(self):
         # Используем уже существующий QApplication
@@ -71,16 +77,20 @@ class Ui_BFGS(Ui_BFGS_calc,QMainWindow):
         self.result_ui.setupUi(self.result_window)
         
         # Обновляем информацию в окне результата
-        self.result_ui.Func.setText(self.json['func'])
         
-        # Заполняем таблицу результатами
-        self.result_ui.res_func_table.setRowCount(len(self.json['iterations']['iterations']))
-        for i, iteration in enumerate(self.json['iterations']['iterations']):
-            self.result_ui.res_func_table.setItem(i, 0, QTableWidgetItem(str(i)))  # Номер
-            self.result_ui.res_func_table.setItem(i, 1, QTableWidgetItem(str(iteration['f'])))  # Значение функции
-            self.result_ui.res_func_table.setItem(i, 2, QTableWidgetItem(str(iteration['coord'])))  # Координаты
+        if self.json['iterations']!=[]:
+            self.result_ui.Func.setText(self.json['func'])
+            # Заполняем таблицу результатами
+            self.result_ui.res_func_table.setRowCount(len(self.json['iterations']['iterations']))
+            for i, iteration in enumerate(self.json['iterations']['iterations']):
+                self.result_ui.res_func_table.setItem(i, 0, QTableWidgetItem(str(i)))  # Номер
+                self.result_ui.res_func_table.setItem(i, 1, QTableWidgetItem(str(iteration['f'])))  # Значение функции
+                self.result_ui.res_func_table.setItem(i, 2, QTableWidgetItem(str(iteration['coord'])))  # Координаты
 
-        self.result_window.show()
+            self.result_window.show()
+        else:
+            self.result_ui.Func.setText(str(self.e))
+            self.result_window.show()
     
     def create_report_button_clicked(self):
         pass

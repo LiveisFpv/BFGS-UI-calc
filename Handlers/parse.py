@@ -8,8 +8,8 @@ def parse(func):
                 while j<l and ord(func[j])>=ord('0') and ord(func[j])<=ord('9'):
                     j+=1
                 j+=1
-                vars.append(func[i:j])
+                if func[i:j] not in vars:
+                    vars.append(func[i:j])
                 i=j
             i+=1
-        print(vars)
-        return vars
+        return sorted(vars)
