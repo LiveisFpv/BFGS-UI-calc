@@ -1,0 +1,16 @@
+{
+    "func": "x[0]**2",
+    "epsilon": 0.001,
+    "table_func": {
+        "vars": [
+            "x[0]"
+        ],
+        "coords": [
+            8.0
+        ],
+        "derivatives": [
+            "x[0]*2"
+        ]
+    },
+    "iterations": []
+}
