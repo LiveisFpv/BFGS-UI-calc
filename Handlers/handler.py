@@ -172,6 +172,12 @@ class Ui_BFGS(Ui_BFGS_calc,QMainWindow):
 
     def save_button_clicked(self):
         """Сохраняет текущие данные в JSON-файл."""
+        self.json['func']=self.Func.text()
+        self.json['epsilon']=float(self.EPS.text())
+        for r in range(0, self.Table_func.rowCount()):
+            self.json['table_func']['vars'].append(self.Table_func.item(r,0).text())
+            self.json['table_func']['coords'].append(float(self.Table_func.item(r,1).text()))
+            self.json['table_func']['derivatives'].append(self.Table_func.item(r,2).text())
         file_path, _ = QFileDialog.getSaveFileName(
             self,
             "Сохранить данные как",

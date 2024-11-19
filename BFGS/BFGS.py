@@ -84,7 +84,7 @@ class BFGS():
             dot_ysk = np.dot(yk, sk)
             
             # Если скалярное произведение слишком мало, избегаем деления на ноль
-            if np.abs(dot_ysk) < 1e-10:
+            if np.abs(dot_ysk) < 1e-12:
                 print("Warning: Skalar product is too small, skipping Hessian update")
             else:
             # Обновляем матрицу Гессе (приближенно) с использованием формулы BFGS
