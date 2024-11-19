@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BFGS_calc</class>
+ <widget class="QMainWindow" name="BFGS_calc">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>921</width>
+    <height>684</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>14</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>BFGS_calc</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Функция:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="Func">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>x^2+y</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Calculate">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Рассчитать</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Точность</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="EPS">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>0.001</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="Table_func">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="showGrid">
+       <bool>true</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <property name="cornerButtonEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>300</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>100</number>
+      </attribute>
+      <attribute name="horizontalHeaderHighlightSections">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>100</number>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>100</number>
+      </attribute>
+      <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Переменная</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Начальная координата поиска</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Первая производная</string>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>921</width>
+     <height>33</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="Open"/>
+    <addaction name="Save"/>
+    <addaction name="Create_report"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <action name="Open">
+   <property name="text">
+    <string>Открыть</string>
+   </property>
+  </action>
+  <action name="Save">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="Create_report">
+   <property name="text">
+    <string>Создать отчет</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
